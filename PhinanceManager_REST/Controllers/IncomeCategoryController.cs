@@ -10,22 +10,22 @@ using System.Threading.Tasks;
 namespace PhinanceManager_REST.Controllers
 {
     [ApiController]
-    [Route("phinancemanager/incomecategory")]
+    [Route("api/incomecategories")]
     public class IncomeCategoryController : ControllerBase
     {
-        private readonly PhinanceManagerDbContext _context;
+        private readonly FinanceManagerDbContext _context;
 
-        public IncomeCategoryController(PhinanceManagerDbContext context)
+        public IncomeCategoryController(FinanceManagerDbContext context)
         {
             _context = context;
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public ActionResult<IncomeCategory> AddIncomeCategory([FromBody] AddIncomeCategoryRequest request)
         {
             var newIncomeCategory = new IncomeCategory();
 
-            newIncomeCategory.NewIncomeCategory(request);
+            newIncomeCategory.AddNewIncomeCategory(request);
 
             _context.Add(newIncomeCategory);
             _context.SaveChanges();

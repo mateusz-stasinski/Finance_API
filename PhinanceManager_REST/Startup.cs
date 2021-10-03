@@ -25,7 +25,7 @@ namespace PhinanceManager_REST
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<PhinanceManagerDbContext>(options => 
+            services.AddDbContext<FinanceManagerDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("PHINANCE_MANAGER_DB")));
 
             services.AddControllers();

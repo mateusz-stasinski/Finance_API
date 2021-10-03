@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 namespace PhinanceManager_REST.Controllers
 {
     [ApiController]
-    [Route("phinancemanager/people")]
+    [Route("api/peoples")]
     public class PeopleController : ControllerBase
     {
-        private readonly PhinanceManagerDbContext _context;
+        private readonly FinanceManagerDbContext _context;
 
-        public PeopleController(PhinanceManagerDbContext context)
+        public PeopleController(FinanceManagerDbContext context)
         {
             _context = context;
         }
@@ -30,7 +30,8 @@ namespace PhinanceManager_REST.Controllers
         public ActionResult<People> AddPeople([FromBody] AddPeopleRequest request)
         {
             var newPeople = new People();
-            newPeople.NewPeople(request);
+            // Refactor this same as PaymentController
+            newPeople.AddNewPeople(request);
             
             _context.Add(newPeople);
             _context.SaveChanges();

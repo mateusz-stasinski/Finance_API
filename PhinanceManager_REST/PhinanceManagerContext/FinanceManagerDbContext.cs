@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace PhinanceManager_REST.PhinanceManagerContext
 {
-    public partial class PhinanceManagerDbContext : DbContext
+    public partial class FinanceManagerDbContext : DbContext
     {
-        public PhinanceManagerDbContext()
+        public FinanceManagerDbContext()
         {
         }
 
-        public PhinanceManagerDbContext(DbContextOptions<PhinanceManagerDbContext> options): base(options)
+        public FinanceManagerDbContext(DbContextOptions<FinanceManagerDbContext> options): base(options)
         {
         }
 

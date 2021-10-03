@@ -17,7 +17,7 @@ namespace PhinanceManager_REST.Entities
         [InverseProperty("Reciepent")]
         public virtual ICollection<Payment> Payment { get; set; }
 
-        public void NewReciepent(AddReciepentRequest request)
+        public void AddNewReciepent(AddReciepentRequest request)
         {
             ReciepentName = request.ReciepentName;
         }

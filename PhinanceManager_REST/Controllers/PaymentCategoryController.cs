@@ -2,24 +2,21 @@
 using PhinanceManager_REST.Entities;
 using PhinanceManager_REST.PhinanceManagerContext;
 using PhinanceManager_REST.Requests;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PhinanceManager_REST.Controllers
 {
     [ApiController]
-    [Route("phinancemanager/paymentcategory")]
+    //Could me moved to patments controller - payment categories are bounded to payments
+    [Route("api/payments/categories")]
     public class PaymentCategoryController : ControllerBase
     {
-        private readonly PhinanceManagerDbContext _context;
-        public PaymentCategoryController (PhinanceManagerDbContext context)
+        private readonly FinanceManagerDbContext _context;
+        public PaymentCategoryController (FinanceManagerDbContext context)
         {
             _context = context;
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public ActionResult<PaymentCategory> AddPaymentCategory([FromBody] AddPaymentCategoryRequest request)
         {
             PaymentCategory newPaymentCategory = new PaymentCategory();

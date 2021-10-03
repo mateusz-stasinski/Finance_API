@@ -10,26 +10,29 @@ using System.Threading.Tasks;
 namespace PhinanceManager_REST.Controllers
 {
     [ApiController]
-    [Route("phinancemanager/reciepent")]
-    public class ReciepentController : ControllerBase
+    //Refactor this same as PaymentController
+    [Route("api/recipients")]
+    public class RecipientController : ControllerBase
     {
-        private readonly PhinanceManagerDbContext _context; 
-        public ReciepentController (PhinanceManagerDbContext context)
+        private readonly FinanceManagerDbContext _context; 
+        public RecipientController (FinanceManagerDbContext context)
         {
             _context = context;
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public ActionResult<Reciepent> AddReciepent([FromBody] AddReciepentRequest request)
         {
             Reciepent newReciepent = new Reciepent();
-            newReciepent.NewReciepent(request);
+
+            //Refactor this same as PaymentController
+            newReciepent.AddNewReciepent(request);
             _context.Add(newReciepent);
             _context.SaveChanges();
             return Ok();
         }
 
-        [HttpGet("getbyid")]
+        [HttpGet]
         public ActionResult GetReciepentById([FromQuery] int id)
         {
             var reciepent = _context.Reciepent.Where(r => r.ReciepentId == id);

@@ -13,8 +13,8 @@ namespace PhinanceManager_REST.Controllers
     [Route("phinancemanager/sender")]
     public class SenderController : ControllerBase
     {
-        private readonly PhinanceManagerDbContext _context;
-        public SenderController (PhinanceManagerDbContext context)
+        private readonly FinanceManagerDbContext _context;
+        public SenderController (FinanceManagerDbContext context)
         {
             _context = context;
         }
@@ -23,7 +23,8 @@ namespace PhinanceManager_REST.Controllers
         public ActionResult<Sender> AddSender([FromBody] AddSenderRequest request)
         {
             Sender newSender = new Sender();
-            newSender.NewSender(request);
+            //Refactor this same as PaymentController
+            newSender.AddNewSender(request);
 
             _context.Add(newSender);
             _context.SaveChanges();

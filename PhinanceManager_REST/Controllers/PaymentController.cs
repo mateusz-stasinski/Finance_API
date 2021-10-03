@@ -10,35 +10,49 @@ using System.Threading.Tasks;
 namespace PhinanceManager_REST.Controllers
 {
     [ApiController]
-    [Route("phinancemanager/payment")]
+    [Route("api/payments")]
     public class PaymentController : ControllerBase
     {
-        private readonly PhinanceManagerDbContext _context;
-        public PaymentController (PhinanceManagerDbContext context)
+        private readonly FinanceManagerDbContext _context;
+        public PaymentController (FinanceManagerDbContext context)
         {
             _context = context;
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public ActionResult<Payment> AddPayment([FromBody] AddPaymentRequest request)
         {
-            Payment newPaymant = new Payment();
-            newPaymant.NewPayment(request);
+            var newPayment = new Payment();
+            newPayment.AddNewPayment(
+                request.PaymentAmount,
+                request.PaymentCategoryId,
+                request.PaymentDate,
+                request.PeopleId,
+                request.ReciepentId);
 
-            // Comment
-
-            _context.Add(newPaymant);
+            _context.Add(newPayment);
             _context.SaveChanges();
             return Ok();
         }
 
-        [HttpGet("getbydate")]
-        public ActionResult<List<Payment>> GetPaymentsByDate([FromBody] GetPaymentsByDateRequest request)
+        [HttpGet("date")]
+        public ActionResult<List<Payment>> GetPaymentsByDate([FromQuery] DateTime from, [FromQuery] DateTime to)
         {
-            List<Payment> PaymentsByDate = _context.Payment.Where(p => p.PaymentDate >= request.FromDate
-                && p.PaymentDate <= request.ToDate).ToList();
+            var paymentsByDate = _context.Payment.Where(p => p.PaymentDate >= from
+                                                             && p.PaymentDate <= to).ToList();
 
-            return Ok(PaymentsByDate);
+            return Ok(paymentsByDate);
+        }
+
+        [HttpPost("categories")]
+        public ActionResult<PaymentCategory> AddPaymentCategory([FromBody] AddPaymentCategoryRequest request)
+        {
+            PaymentCategory newPaymentCategory = new PaymentCategory();
+            newPaymentCategory.NewPaymentCategory(request);
+
+            _context.Add(newPaymentCategory);
+            _context.SaveChanges();
+            return Ok();
         }
     }
 }

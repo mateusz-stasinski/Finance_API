@@ -30,7 +30,7 @@ namespace PhinanceManager_REST.Entities
         [InverseProperty("Income")]
         public virtual IncomeCategory IncomeCategory { get; set; }
 
-        public void NewIncome(AddIncomeRequest request)
+        public void AddNewIncome(AddIncomeRequest request)
         {
             IncomeId = new Guid();
             IncomeAmount = request.IncomeAmount;

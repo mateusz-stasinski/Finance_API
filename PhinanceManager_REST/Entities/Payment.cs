@@ -1,10 +1,7 @@
 ﻿using PhinanceManager_REST.Requests;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PhinanceManager_REST.Entities
 {
@@ -28,16 +25,17 @@ namespace PhinanceManager_REST.Entities
 
         [ForeignKey(nameof(ReciepentId))]
         [InverseProperty("Payment")]
-        public virtual Reciepent Reciepent { get; set; }
+        public virtual Reciepent Recipient { get; set; }
 
-        public void NewPayment(AddPaymentRequest request)
+        public void AddNewPayment(double paymentAmount, int paymentCategoryId, DateTime paymentDate, 
+            int peopleId, int reciepentId)
         {
             PaymentId = new Guid();
-            PaymentAmount = request.PaymentAmount;
-            PaymentDate = request.PaymentDate;
-            PeopleId = request.PeopleId;
-            PaymentCategoryId = request.PaymentCategoryId;
-            ReciepentId = request.ReciepentId;
+            PaymentAmount = paymentAmount;
+            PaymentDate = paymentDate;
+            PeopleId = peopleId;
+            PaymentCategoryId = paymentCategoryId;
+            ReciepentId = reciepentId;
         }
     }
 }

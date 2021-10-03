@@ -10,27 +10,28 @@ using System.Threading.Tasks;
 namespace PhinanceManager_REST.Controllers
 {
     [ApiController]
-    [Route("phinancemanager/income")]
+    [Route("api/incomes")]
     public class IncomeController : ControllerBase
     {
-        private readonly PhinanceManagerDbContext _context;
-        public IncomeController (PhinanceManagerDbContext context)
+        private readonly FinanceManagerDbContext _context;
+        public IncomeController (FinanceManagerDbContext context)
         {
             _context = context;
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public ActionResult<Income> AddIncome([FromBody] AddIncomeRequest request)
         {
             Income newIncome = new Income();
-            newIncome.NewIncome(request);
+            newIncome.AddNewIncome(request);
 
             _context.Add(newIncome);
             _context.SaveChanges();
             return Ok();
         }
 
-        [HttpGet("getbydate")]
+        [HttpGet]
+        //Refactore this same as payment controller
         public ActionResult<List<Income>> GetIncomesByDate([FromBody] GetIncomesByDateRequest request)
         {
             List<Income> incomesByDate = _context.Income.Where(i => i.IncomeDate >= request.FromDate
