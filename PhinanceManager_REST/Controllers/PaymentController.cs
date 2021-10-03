@@ -25,6 +25,8 @@ namespace PhinanceManager_REST.Controllers
             Payment newPaymant = new Payment();
             newPaymant.NewPayment(request);
 
+            // Comment
+
             _context.Add(newPaymant);
             _context.SaveChanges();
             return Ok();
