@@ -21,14 +21,14 @@ namespace FinanceManager_REST.Controllers
         }
 
         [HttpPost]
-        public ActionResult<IncomeCategory> AddIncomeCategory([FromBody] AddIncomeCategoryRequest request)
+        public async Task<ActionResult<IncomeCategory>> AddIncomeCategory([FromBody] AddIncomeCategoryRequest request)
         {
             var newIncomeCategory = new IncomeCategory();
 
             newIncomeCategory.AddNewIncomeCategory(request.IncomeCategoryName);
 
             _context.Add(newIncomeCategory);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return Ok();
         }
     }

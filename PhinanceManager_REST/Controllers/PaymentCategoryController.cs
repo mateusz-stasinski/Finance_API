@@ -20,13 +20,13 @@ namespace PhinanceManager_REST.Controllers
         }
 
         [HttpPost]
-        public ActionResult<PaymentCategory> AddPaymentCategory([FromBody] AddPaymentCategoryRequest request)
+        public async Task<ActionResult<PaymentCategory>> AddPaymentCategory([FromBody] AddPaymentCategoryRequest request)
         {
             var newPaymentCategory = new PaymentCategory();
             newPaymentCategory.AddNewPaymentCategory(request.PaymentCategoryName);
 
             _context.Add(newPaymentCategory);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return Ok();
         }
     }

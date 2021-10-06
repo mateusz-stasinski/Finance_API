@@ -21,13 +21,13 @@ namespace PhinanceManager_REST.Controllers
         }
 
         [HttpPost]
-        public ActionResult<People> AddPeople([FromBody] AddPeopleRequest request)
+        public async Task<ActionResult<People>> AddPeople([FromBody] AddPeopleRequest request)
         {
             var newPeople = new People();
             newPeople.AddNewPeople(request.Name, request.Surname);
             
             _context.Add(newPeople);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return Ok();
         }
     }

@@ -20,13 +20,13 @@ namespace PhinanceManager_REST.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Sender> AddSender([FromBody] AddSenderRequest request)
+        public async Task<ActionResult<Sender>> AddSender([FromBody] AddSenderRequest request)
         {
             var newSender = new Sender();
             newSender.AddNewSender(request.SenderName);
 
             _context.Add(newSender);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return Ok();
         }
 
