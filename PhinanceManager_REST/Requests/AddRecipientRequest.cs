@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace PhinanceManager_REST.Requests
 {
-    public class AddReciepentRequest
+    public class AddRecipientRequest
     {
-        public string ReciepentName { get; set; }
+        public string RecipientName { get; set; }
     }
 }

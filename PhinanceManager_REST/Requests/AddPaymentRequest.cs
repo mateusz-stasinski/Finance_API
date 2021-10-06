@@ -11,6 +11,6 @@ namespace PhinanceManager_REST.Requests
         public DateTime PaymentDate { get; set; }
         public int PeopleId { get; set; }
         public int PaymentCategoryId { get; set; }
-        public int ReciepentId { get; set; }
+        public int RecipientId { get; set; }
     }
 }

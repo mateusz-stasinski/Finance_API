@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PhinanceManager_REST.PhinanceManagerContext;
+using PhinanceManager_REST.FinanceManagerContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +25,7 @@ namespace PhinanceManager_REST
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<PhinanceManagerDbContext>(options => 
+            services.AddDbContext<FinanceManagerDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("PHINANCE_MANAGER_DB")));
 
             services.AddControllers();

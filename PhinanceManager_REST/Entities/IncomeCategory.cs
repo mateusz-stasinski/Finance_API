@@ -17,9 +17,9 @@ namespace PhinanceManager_REST.Entities
         [InverseProperty("IncomeCategory")]
         public virtual ICollection<Income> Income { get; set; }
 
-        public void NewIncomeCategory(AddIncomeCategoryRequest request)
+        public void AddNewIncomeCategory(string incomeCategoryName)
         {
-            IncomeCategoryName = request.IncomeCategoryName;
+            incomeCategoryName = IncomeCategoryName;
         }
     }
 }

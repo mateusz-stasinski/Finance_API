@@ -21,12 +21,10 @@ namespace PhinanceManager_REST.Entities
         [InverseProperty("People")]
         public virtual ICollection<Payment> Payment { get; set; }
 
-        public void NewPeople(AddPeopleRequest request)
+        public void AddNewPeople(string name, string surname)
         {
-            //People newPeople = new People();
-            Name = request.Name;
-            Surname = request.Surname;
-            //return newPeople;
+            Name = name;
+            Surname = surname;
         }
     }
 }

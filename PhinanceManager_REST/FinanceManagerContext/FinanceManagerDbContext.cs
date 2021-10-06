@@ -5,15 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PhinanceManager_REST.PhinanceManagerContext
+namespace PhinanceManager_REST.FinanceManagerContext
 {
-    public partial class PhinanceManagerDbContext : DbContext
+    public partial class FinanceManagerDbContext : DbContext
     {
-        public PhinanceManagerDbContext()
+        public FinanceManagerDbContext()
         {
         }
 
-        public PhinanceManagerDbContext(DbContextOptions<PhinanceManagerDbContext> options): base(options)
+        public FinanceManagerDbContext(DbContextOptions<FinanceManagerDbContext> options): base(options)
         {
         }
 
@@ -22,7 +22,7 @@ namespace PhinanceManager_REST.PhinanceManagerContext
         public virtual DbSet<Payment> Payment { get; set; }
         public virtual DbSet<PaymentCategory> PaymentCategory { get; set; }
         public virtual DbSet<People> People { get; set; }
-        public virtual DbSet<Reciepent> Reciepent { get; set; }
+        public virtual DbSet<Recipient> Recipient { get; set; }
         public virtual DbSet<Sender> Sender { get; set; }
 
         protected void OnModelCreating(ModelBuilder modelBuilder)

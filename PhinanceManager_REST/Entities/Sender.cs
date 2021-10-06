@@ -17,9 +17,9 @@ namespace PhinanceManager_REST.Entities
         [InverseProperty("Sender")]
         public virtual ICollection<Income> Income { get; set; }
 
-        public void NewSender(AddSenderRequest request)
+        public void AddNewSender(string senderName)
         {
-            SenderName = request.SenderName;
+            SenderName = senderName;
         }
     }
 }

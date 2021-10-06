@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PhinanceManager_REST.Entities;
-using PhinanceManager_REST.PhinanceManagerContext;
+using PhinanceManager_REST.FinanceManagerContext;
 using PhinanceManager_REST.Requests;
 using System;
 using System.Collections.Generic;
@@ -10,35 +10,34 @@ using System.Threading.Tasks;
 namespace PhinanceManager_REST.Controllers
 {
     [ApiController]
-    [Route("phinancemanager/payment")]
+    [Route("api/payments")]
     public class PaymentController : ControllerBase
     {
-        private readonly PhinanceManagerDbContext _context;
-        public PaymentController (PhinanceManagerDbContext context)
+        private readonly FinanceManagerDbContext _context;
+        public PaymentController (FinanceManagerDbContext context)
         {
             _context = context;
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public ActionResult<Payment> AddPayment([FromBody] AddPaymentRequest request)
         {
-            Payment newPaymant = new Payment();
-            newPaymant.NewPayment(request);
-
-            // Comment
+            var newPaymant = new Payment();
+            newPaymant.AddNewPayment(request.PaymentAmount, request.PaymentDate, request.PaymentCategoryId, 
+                request.PeopleId, request.RecipientId);
 
             _context.Add(newPaymant);
             _context.SaveChanges();
             return Ok();
         }
 
-        [HttpGet("getbydate")]
-        public ActionResult<List<Payment>> GetPaymentsByDate([FromBody] GetPaymentsByDateRequest request)
+        [HttpGet("date")]
+        public ActionResult<List<Payment>> GetPaymentsByDate([FromQuery] DateTime from, [FromQuery] DateTime to)
         {
-            List<Payment> PaymentsByDate = _context.Payment.Where(p => p.PaymentDate >= request.FromDate
-                && p.PaymentDate <= request.ToDate).ToList();
+            var paymentsByDate = _context.Payment.Where(p => p.PaymentDate >= from
+                && p.PaymentDate <= to).ToList();
 
-            return Ok(PaymentsByDate);
+            return Ok(paymentsByDate);
         }
     }
 }

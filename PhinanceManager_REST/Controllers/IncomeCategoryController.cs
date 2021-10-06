@@ -1,31 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PhinanceManager_REST.Entities;
-using PhinanceManager_REST.PhinanceManagerContext;
+using PhinanceManager_REST.FinanceManagerContext;
 using PhinanceManager_REST.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PhinanceManager_REST.Controllers
+namespace FinanceManager_REST.Controllers
 {
     [ApiController]
-    [Route("phinancemanager/incomecategory")]
+    [Route("api/incomes/categories")]
     public class IncomeCategoryController : ControllerBase
     {
-        private readonly PhinanceManagerDbContext _context;
+        private readonly FinanceManagerDbContext _context;
 
-        public IncomeCategoryController(PhinanceManagerDbContext context)
+        public IncomeCategoryController(FinanceManagerDbContext context)
         {
             _context = context;
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public ActionResult<IncomeCategory> AddIncomeCategory([FromBody] AddIncomeCategoryRequest request)
         {
             var newIncomeCategory = new IncomeCategory();
 
-            newIncomeCategory.NewIncomeCategory(request);
+            newIncomeCategory.AddNewIncomeCategory(request.IncomeCategoryName);
 
             _context.Add(newIncomeCategory);
             _context.SaveChanges();

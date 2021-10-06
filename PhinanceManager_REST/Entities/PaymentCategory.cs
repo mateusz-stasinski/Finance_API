@@ -17,9 +17,9 @@ namespace PhinanceManager_REST.Entities
         [InverseProperty("PaymentCategory")]
         public virtual ICollection<Payment> Payment { get; set; }
 
-        public void NewPaymentCategory(AddPaymentCategoryRequest request)
+        public void AddNewPaymentCategory(string paymentCategoryName)
         {
-            PaymentCategoryName = request.PaymentCategoryName;
+            PaymentCategoryName = paymentCategoryName;
         }
     }
 }

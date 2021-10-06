@@ -30,14 +30,14 @@ namespace PhinanceManager_REST.Entities
         [InverseProperty("Income")]
         public virtual IncomeCategory IncomeCategory { get; set; }
 
-        public void NewIncome(AddIncomeRequest request)
+        public void AddNewIncome(double incomeAmount, DateTime incomeDate, int peopleId, int senderId, int incomeCategoryId)
         {
             IncomeId = new Guid();
-            IncomeAmount = request.IncomeAmount;
-            IncomeDate = request.IncomeDate;
-            PeopleId = request.PeopleId;
-            SenderId = request.SenderId;
-            IncomeCategoryId = request.IncomeCategoryId;
+            incomeAmount = IncomeAmount;
+            incomeDate = IncomeDate;
+            peopleId = PeopleId;
+            senderId = SenderId;
+            incomeCategoryId = IncomeCategoryId;
         }
     }
 }

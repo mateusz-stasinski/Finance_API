@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace PhinanceManager_REST.Entities
 {
-    public class Reciepent
+    public class Recipient
     {
         [Key]
-        public int ReciepentId { get; set; }
-        public string ReciepentName { get; set; }
+        public int RecipientId { get; set; }
+        public string RecipientName { get; set; }
 
-        [InverseProperty("Reciepent")]
+        [InverseProperty("Recipient")]
         public virtual ICollection<Payment> Payment { get; set; }
 
-        public void NewReciepent(AddReciepentRequest request)
+        public void AddNewRecipient(string recipientName)
         {
-            ReciepentName = request.ReciepentName;
+            RecipientName = recipientName;
         }
     }
 }

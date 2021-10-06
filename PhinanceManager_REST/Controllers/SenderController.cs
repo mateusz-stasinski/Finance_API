@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PhinanceManager_REST.Entities;
-using PhinanceManager_REST.PhinanceManagerContext;
+using PhinanceManager_REST.FinanceManagerContext;
 using PhinanceManager_REST.Requests;
 using System;
 using System.Collections.Generic;
@@ -10,20 +10,20 @@ using System.Threading.Tasks;
 namespace PhinanceManager_REST.Controllers
 {
     [ApiController]
-    [Route("phinancemanager/sender")]
+    [Route("api/senders")]
     public class SenderController : ControllerBase
     {
-        private readonly PhinanceManagerDbContext _context;
-        public SenderController (PhinanceManagerDbContext context)
+        private readonly FinanceManagerDbContext _context;
+        public SenderController (FinanceManagerDbContext context)
         {
             _context = context;
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public ActionResult<Sender> AddSender([FromBody] AddSenderRequest request)
         {
-            Sender newSender = new Sender();
-            newSender.NewSender(request);
+            var newSender = new Sender();
+            newSender.AddNewSender(request.SenderName);
 
             _context.Add(newSender);
             _context.SaveChanges();

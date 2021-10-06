@@ -16,7 +16,7 @@ namespace PhinanceManager_REST.Entities
         public DateTime PaymentDate { get; set; }
         public int PeopleId { get; set; }
         public int PaymentCategoryId { get; set; }
-        public int ReciepentId { get; set; }
+        public int RecipientId { get; set; }
 
         [ForeignKey(nameof(PeopleId))]
         [InverseProperty("Payment")]
@@ -26,18 +26,18 @@ namespace PhinanceManager_REST.Entities
         [InverseProperty("Payment")]
         public virtual PaymentCategory PaymentCategory { get; set; }
 
-        [ForeignKey(nameof(ReciepentId))]
+        [ForeignKey(nameof(RecipientId))]
         [InverseProperty("Payment")]
-        public virtual Reciepent Reciepent { get; set; }
+        public virtual Recipient Recipient { get; set; }
 
-        public void NewPayment(AddPaymentRequest request)
+        public void AddNewPayment(double paymentAmount, DateTime paymentDate, int peopleId, int paymentCategoryId, int recipientId)
         {
             PaymentId = new Guid();
-            PaymentAmount = request.PaymentAmount;
-            PaymentDate = request.PaymentDate;
-            PeopleId = request.PeopleId;
-            PaymentCategoryId = request.PaymentCategoryId;
-            ReciepentId = request.ReciepentId;
+            PaymentAmount = paymentAmount;
+            PaymentDate = paymentDate;
+            PeopleId = peopleId;
+            PaymentCategoryId = paymentCategoryId;
+            RecipientId = recipientId;
         }
     }
 }
