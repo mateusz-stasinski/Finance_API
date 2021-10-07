@@ -34,7 +34,7 @@ namespace PhinanceManager_REST.Controllers
         [HttpGet("id")]
         public async Task<ActionResult> GetSenderById([FromQuery] int id)
         {
-            var sender = await _context.Sender.Where(s => s.SenderId == id).ToListAsync();
+            var sender = await _context.Sender.SingleAsync(s => s.SenderId == id);
             return Ok(sender);
         }
     }
