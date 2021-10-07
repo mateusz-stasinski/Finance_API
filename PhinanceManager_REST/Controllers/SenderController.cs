@@ -31,7 +31,7 @@ namespace PhinanceManager_REST.Controllers
             return Ok();
         }
 
-        [HttpGet("getbyid")]
+        [HttpGet("id")]
         public async Task<ActionResult> GetSenderById([FromQuery] int id)
         {
             var sender = await _context.Sender.Where(s => s.SenderId == id).ToListAsync();
