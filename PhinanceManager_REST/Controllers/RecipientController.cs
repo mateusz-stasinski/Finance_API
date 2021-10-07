@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PhinanceManager_REST.Entities;
 using PhinanceManager_REST.FinanceManagerContext;
 using PhinanceManager_REST.Requests;
@@ -31,9 +32,9 @@ namespace PhinanceManager_REST.Controllers
         }
 
         [HttpGet("id")]
-        public ActionResult GetRecipientById([FromQuery] int id)
+        public async Task<ActionResult> GetRecipientById([FromQuery] int id)
         {
-            var recipient = _context.Recipient.Where(r => r.RecipientId == id);
+            var recipient = await _context.Recipient.Where(r => r.RecipientId == id).ToListAsync();
             return Ok(recipient);
         }
     }
